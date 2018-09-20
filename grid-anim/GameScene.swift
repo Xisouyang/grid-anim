@@ -10,6 +10,7 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
+    
   
     // Called when the scene has been displayed
     override func didMove(to view: SKView) {
@@ -20,6 +21,10 @@ class GameScene: SKScene {
 
         getGrid(nodeSize: boxSize, midScreenSize: midScreen);
         
+    }
+    
+    func random(num: Int) -> Int {
+        return Int(arc4random_uniform(UInt32(num)));
     }
     
     func getGrid(nodeSize: CGPoint, midScreenSize: CGPoint) {
@@ -61,6 +66,8 @@ class GameScene: SKScene {
     func createNode() -> SKSpriteNode {
         let size = CGSize(width: 30, height: 30);
         let box = SKSpriteNode(texture: nil, color: UIColor.red, size: size);
+        box.position.x = CGFloat(random(num: Int((self.scene?.size.width)!)))
+        box.position.y = CGFloat(random(num: Int((self.scene?.size.height)!)))
         return box;
     }
     
@@ -68,9 +75,9 @@ class GameScene: SKScene {
         
         var count = 0;
         
-        let action1 = SKAction.move(to: midScreenSize, duration: 1.8);
+        let action1 = SKAction.move(to: midScreenSize, duration: 1.7);
         let action2 = SKAction.move(to: rightPos , duration: 2);
-        let action3 = SKAction.move(to: leftPos, duration: 2.2);
+        let action3 = SKAction.move(to: leftPos, duration: 2.3);
         
         for _ in nodeArr {
             switch(count) {
